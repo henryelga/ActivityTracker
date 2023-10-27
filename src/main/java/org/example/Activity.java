@@ -63,6 +63,8 @@ public class Activity
         this.heart_rate = heart_rate;
     }
 
+//    no change blah blah
+
     /*
     TODO
      - energy expended based on the average kilometres per hour
