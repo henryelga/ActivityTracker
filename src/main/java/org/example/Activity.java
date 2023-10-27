@@ -6,13 +6,15 @@ public class Activity
     private double duration; // in minutes
     private String date; // format: dd/mm/yyyy
     private double distance; // in kilometers
+    private int heart_rate; // in beats per minute
 
-    public Activity(String activity_type, double duration, String date, double distance)
+    public Activity(String activity_type, double duration, String date, double distance, int heart_rate)
     {
         this.activity_type = activity_type;
         this.duration = duration;
         this.date = date;
         this.distance = distance;
+        this.heart_rate = heart_rate;
     }
 
     public String getActivity_type()
@@ -45,14 +47,20 @@ public class Activity
         this.date = date;
     }
 
-    public double getDistance()
-    {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance)
-    {
+    public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public int getHeart_rate() {
+        return heart_rate;
+    }
+
+    public void setHeart_rate(int heart_rate) {
+        this.heart_rate = heart_rate;
     }
 
     /*
