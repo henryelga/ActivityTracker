@@ -137,8 +137,7 @@ public class Main
         }
     }
 
-    public static void displaySubset(List<Activity> activityList)
-    {
+    public static void displaySubset(List<Activity> activityList) {
         Scanner kb = new Scanner(System.in);
         System.out.println();
         System.out.println("View subset of activity by: ");
@@ -150,22 +149,52 @@ public class Main
 
         int subsetChoice = kb.nextInt();
         kb.nextLine();
-        if(subsetChoice == 1)
-        {
+        if (subsetChoice == 1) {
             System.out.print("Enter activity type: ");
             String activityChoice = kb.nextLine();
             System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
             System.out.println("-------------------------------------------------------------------------------------------------");
-            for (Activity activity : activityList)
-            {
+            for (Activity activity : activityList) {
                 activity.calculateIntensity();
                 activity.caloriesBurned();
-                if(activity.getActivity_type().equals(activityChoice))
-                System.out.println(activity);
+                if (activity.getActivity_type().equals(activityChoice))
+                    System.out.println(activity);
             }
-
+        } else if (subsetChoice == 2) {
+            System.out.println("Enter minimum distance: ");
+            double minDistance = kb.nextDouble();
+            System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            for (Activity activity : activityList) {
+                activity.calculateIntensity();
+                activity.caloriesBurned();
+                if (activity.getDistance() >= minDistance)
+                    System.out.println(activity);
+            }
+        } else if (subsetChoice == 3) {
+            System.out.println("Enter type of energy: ");
+            String energyType = kb.nextLine();
+            energyType.toLowerCase();
+            System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            for (Activity activity : activityList) {
+                activity.calculateIntensity();
+                activity.caloriesBurned();
+                if (activity.getActivity_type().toLowerCase().equals(energyType))
+                    System.out.println(activity);
+            }
+        } else {
+            System.out.println("Enter minimum duration: ");
+            int minDuration = kb.nextInt();
+            System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            for (Activity activity : activityList) {
+                activity.calculateIntensity();
+                activity.caloriesBurned();
+                if (activity.getDuration() >= minDuration)
+                    System.out.println(activity);
+            }
         }
-
     }
 
     public static void displayCaloriesBurnedDescending(List<Activity> activityList)
