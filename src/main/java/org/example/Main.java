@@ -13,14 +13,45 @@ public class Main
     {
         // Read in the data from the CSV
         String fileName = "ActivityData.csv";
+public class Main {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        System.out.println("=========================================");
+        System.out.println("=            Mila & Elga's              =");
+        System.out.println("=           Activity Tracker            =");
+        System.out.println("=========================================");
+        System.out.println();
+        System.out.println("Select which file to view the activity of");
+        System.out.println("1. activity_data_10.csv");
+        System.out.println("2. activity_data_50.csv");
+        System.out.println("3. activity_data_100.csv");
+        System.out.println("4. activity_data_1000.csv");
+        System.out.print("Enter option: ");
+
+        String fileName;
+        int selectFile = kb.nextInt();
+        if(selectFile == 1)
+            fileName = "activity_data_10.csv";
+        else if(selectFile == 2)
+            fileName = "activity_data_50.csv";
+        else if(selectFile == 3)
+            fileName = "activity_data_100.csv";
+        else
+            fileName = "activity_data_1000.csv";
 
         List<Activity> activityList = new ArrayList<>();
 
         System.out.printf("%-16s %-12s %-10s %-10s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM"); // temporary line location
-        try (Scanner sc = new Scanner(new File("ActivityData.csv")))
+        File f = new File(fileName);
+        try (Scanner sc = new Scanner(f))
         {
             while (sc.hasNextLine())
             {
+            // ignoring first line in csv (header)
+            if(sc.hasNextLine())
+                    sc.nextLine();
+
+            while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] tokens = line.split(",");
 
@@ -31,6 +62,7 @@ public class Main
                 int heart_rate = (int) Double.parseDouble(tokens[4]);
 
                 Activity activity = new Activity(activity_type, duration, date, distance, heart_rate);
+                int heart_rate = (int)Double.parseDouble(tokens[4]);
 
                 activityList.add(activity);
 
