@@ -16,6 +16,7 @@ public class Main
 
         List<Activity> activityList = new ArrayList<>();
 
+        System.out.printf("%-16s %-12s %-10s %-10s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM"); // temporary line location
         try (Scanner sc = new Scanner(new File("ActivityData.csv")))
         {
             while (sc.hasNextLine())
@@ -39,6 +40,7 @@ public class Main
                 activity.calculateIntensity();
                 activity.caloriesBurned();
                 System.out.println(activity);
+                System.out.printf("%-16s %-12s %-10.2f %-10.2f %-10d %n", activity_type, date, duration, distance, heart_rate);
             }
 
         } catch (FileNotFoundException exception)
