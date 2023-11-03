@@ -91,7 +91,7 @@ public class Activity
             } else if (kilometer_per_hour <= 2.75)
             {
                 intensity = "Vigorous";
-            } else if (kilometer_per_hour <= 3.5)
+            } else
             {
                 intensity = "Very Vigorous";
             }
@@ -109,7 +109,7 @@ public class Activity
             } else if (kilometer_per_hour > 12 && kilometer_per_hour <= 16)
             {
                 intensity = "Vigorous";
-            } else if (kilometer_per_hour > 16 && kilometer_per_hour <= 24)
+            } else
             {
                 intensity = "Very Vigorous";
             }
@@ -127,7 +127,7 @@ public class Activity
             } else if (kilometer_per_hour >= 25 && kilometer_per_hour <= 33)
             {
                 intensity = "Vigorous";
-            } else if (kilometer_per_hour > 33 && kilometer_per_hour <= 40)
+            } else
             {
                 intensity = "Very Vigorous";
             }
