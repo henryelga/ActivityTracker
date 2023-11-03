@@ -210,6 +210,8 @@ public class Activity
                 activity_type, date, duration, distance, heart_rate, intensity, calories_burned);
     }
 
+//    need to implement enum
+
     /*
     TO DO:
 STEP 1
