@@ -72,41 +72,53 @@ public class Main
 
                 display(activityList);
 
-//                Display activities sorted as calories descending
+                boolean continueSorting = true;
+                while (continueSorting)
+                {
+                    System.out.println("\nSelect sorting option: \n");
+                    System.out.println("1. Calories Descending");
+                    System.out.println("2. Dates Ascending");
+                    System.out.println("3. Dates Descending");
+                    System.out.println("4. Distance Ascending");
+                    System.out.println("5. Distance Descending");
+                    System.out.println("6. Duration Ascending");
+                    System.out.println("7. Duration Descending");
+                    System.out.println("0. Exit");
 
-                System.out.println("Calories Descending:");
-                displayCaloriesBurnedDescending(activityList);
-
-//                Display activities sorted as dates ascending
-
-                System.out.println("Dates Ascending:");
-                displayDatesAscending(activityList);
-
-//                Display activities sorted as dates descending
-
-                System.out.println("Dates Descending:");
-                displayDatesDescending(activityList);
-
-//                Display activities sorted as distance ascending
-
-                System.out.println("Distance Ascending:");
-                displayDistanceAscending(activityList);
-
-//                Display activities sorted as distance descending
-
-                System.out.println("Distance Descending:");
-                displayDistanceDescending(activityList);
-
-//                Display activities sorted as duration ascending
-
-                System.out.println("Duration Ascending:");
-                displayDurationAscending(activityList);
-
-//                Display activities sorted as duration descending
-
-                System.out.println("Duration Descending:");
-                displayDurationDescending(activityList);
-
+                    System.out.print("Enter option: ");
+                    int option = kb.nextInt();
+                    switch (option)
+                    {
+                        case 1:
+                            displayCaloriesBurnedDescending(activityList);
+                            break;
+                        case 2:
+                            displayDatesAscending(activityList);
+                            break;
+                        case 3:
+                            displayDatesDescending(activityList);
+                            break;
+                        case 4:
+                            displayDistanceAscending(activityList);
+                            break;
+                        case 5:
+                            displayDistanceDescending(activityList);
+                            break;
+                        case 6:
+                            displayDurationAscending(activityList);
+                            break;
+                        case 7:
+                            displayDurationDescending(activityList);
+                            break;
+                        case 0:
+                            continueSorting = false;
+                            System.out.println("Exiting...");
+                            break;
+                        default:
+                            System.out.println("Invalid option. Please try again.");
+                            break;
+                    }
+                }
             }
         } catch (FileNotFoundException exception)
         {
@@ -128,49 +140,56 @@ public class Main
         }
     }
 
-    public static void displayCaloriesBurnedDescending(List<Activity> activityList){
+    public static void displayCaloriesBurnedDescending(List<Activity> activityList)
+    {
         CaloriesBurnedDescending caloriesBurnedDescending = new CaloriesBurnedDescending();
         Collections.sort(activityList, caloriesBurnedDescending);
 
         display(activityList);
     }
 
-    public static void displayDatesAscending(List<Activity> activityList){
+    public static void displayDatesAscending(List<Activity> activityList)
+    {
         DatesAscending datesAscending = new DatesAscending();
         Collections.sort(activityList, datesAscending);
 
         display(activityList);
     }
 
-    public static void displayDatesDescending(List<Activity> activityList){
+    public static void displayDatesDescending(List<Activity> activityList)
+    {
         DatesDescending datesDescending = new DatesDescending();
         Collections.sort(activityList, datesDescending);
 
         display(activityList);
     }
 
-    public static void displayDistanceAscending(List<Activity> activityList){
+    public static void displayDistanceAscending(List<Activity> activityList)
+    {
         DistanceAscending distanceAscending = new DistanceAscending();
         Collections.sort(activityList, distanceAscending);
 
         display(activityList);
     }
 
-    public static void displayDistanceDescending(List<Activity> activityList){
+    public static void displayDistanceDescending(List<Activity> activityList)
+    {
         DistanceDescending distanceDescending = new DistanceDescending();
         Collections.sort(activityList, distanceDescending);
 
         display(activityList);
     }
 
-    public static void displayDurationAscending(List<Activity> activityList){
+    public static void displayDurationAscending(List<Activity> activityList)
+    {
         DurationAscending durationAscending = new DurationAscending();
         Collections.sort(activityList, durationAscending);
 
         display(activityList);
     }
 
-    public static void displayDurationDescending(List<Activity> activityList){
+    public static void displayDurationDescending(List<Activity> activityList)
+    {
         DurationDescending durationDescending = new DurationDescending();
         Collections.sort(activityList, durationDescending);
 
