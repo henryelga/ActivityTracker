@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
+        // Read in the data from the CSV
         String fileName = "ActivityData.csv";
 
         try (Scanner sc = new Scanner(new File("ActivityData.csv")))
@@ -15,12 +16,12 @@ public class Main {
                 String[] tokens = line.split(",");
 
                 String activity_type = tokens[0];
-                double duration = Double.parseDouble(tokens[1]);
-                String date = tokens[2];
+                String date = tokens[1];
+                double duration = Double.parseDouble(tokens[2]);
                 double distance = Double.parseDouble(tokens[3]);
                 int heart_rate = Integer.parseInt(tokens[4]);
 
-                System.out.printf("%-20s %5.2f %10s %5.2f %3d %n", activity_type, duration, date, distance, heart_rate);
+                System.out.printf("%-20s %10s %5.2f %5.2f %3d %n", activity_type, date, duration, distance, heart_rate);
             }
 
         } catch (FileNotFoundException exception) {
