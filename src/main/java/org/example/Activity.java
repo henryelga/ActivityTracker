@@ -8,7 +8,7 @@ public class Activity
     private double distance; // in kilometers
     private int heart_rate; // in beats per minute
 
-    private String intensity;
+    private String intensity = "";
 
     private double calories_burned;
 
