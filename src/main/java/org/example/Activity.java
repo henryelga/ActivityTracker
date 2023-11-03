@@ -210,9 +210,6 @@ public class Activity
                 activity_type, date, duration, distance, heart_rate, intensity, calories_burned);
     }
 
-
-    //    no change blah blah
-
     /*
     TO DO:
 STEP 1

@@ -8,12 +8,6 @@ import java.io.*;
 
 import java.io.FileNotFoundException;
 
-//public class Main
-//{
-//    public static void main(String[] args)
-//    {
-//        // Read in the data from the CSV
-//        String fileName = "ActivityData.csv";
 public class Main
 {
     public static void main(String[] args) throws FileNotFoundException
@@ -24,7 +18,8 @@ public class Main
         System.out.println("=           Activity Tracker            =");
         System.out.println("=========================================");
         System.out.println();
-        System.out.println("Select which file to view the activity of");
+        System.out.println("Select which file to view the activity of: ");
+        System.out.println();
         System.out.println("1. activity_data_10.csv");
         System.out.println("2. activity_data_50.csv");
         System.out.println("3. activity_data_100.csv");
@@ -87,6 +82,7 @@ public class Main
 
                     System.out.print("Enter option: ");
                     int option = kb.nextInt();
+                    kb.nextLine();
                     switch (option)
                     {
                         case 1:
@@ -125,19 +121,51 @@ public class Main
             System.out.println("FileNotFoundException caught. The file " + fileName + "may not exist." + exception);
         }
 
+        displaySubset(activityList);
 
     }
 
     public static void display(List<Activity> activityList)
     {
-        System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned"); // temporary line location
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
+        System.out.println("-------------------------------------------------------------------------------------------------");
         for (Activity activity : activityList)
         {
             activity.calculateIntensity();
             activity.caloriesBurned();
             System.out.println(activity);
         }
+    }
+
+    public static void displaySubset(List<Activity> activityList)
+    {
+        Scanner kb = new Scanner(System.in);
+        System.out.println();
+        System.out.println("View subset of activity by: ");
+        System.out.println();
+        System.out.println("1. Activity Type");
+        System.out.println("2. Above a minimum distance");
+        System.out.println("3. Type of energy expended");
+        System.out.println("4. Above a minimum duration");
+
+        int subsetChoice = kb.nextInt();
+        kb.nextLine();
+        if(subsetChoice == 1)
+        {
+            System.out.print("Enter activity type: ");
+            String activityChoice = kb.nextLine();
+            System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            for (Activity activity : activityList)
+            {
+                activity.calculateIntensity();
+                activity.caloriesBurned();
+                if(activity.getActivity_type().equals(activityChoice))
+                System.out.println(activity);
+            }
+
+        }
+
     }
 
     public static void displayCaloriesBurnedDescending(List<Activity> activityList)
