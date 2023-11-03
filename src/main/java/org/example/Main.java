@@ -44,8 +44,6 @@ public class Main
 
         List<Activity> activityList = new ArrayList<>();
 
-        System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned"); // temporary line location
-        System.out.println("------------------------------------------------------------------------------------------------------");
         File f = new File(fileName);
         try (Scanner sc = new Scanner(f))
         {
@@ -98,6 +96,38 @@ public class Main
                 System.out.println("Dates Descending:");
                 display(activityList);
 
+//                Display activities sorted as duration ascending
+
+                DurationAscending durationAscending = new DurationAscending();
+                Collections.sort(activityList, durationAscending);
+
+                System.out.println("Duration Ascending:");
+                display(activityList);
+
+//                Display activities sorted as duration descending
+
+                DurationDescending durationDescending = new DurationDescending();
+                Collections.sort(activityList, durationDescending);
+
+                System.out.println("Duration Descending:");
+                display(activityList);
+
+//                Display activities sorted as distance ascending
+
+                DistanceAscending distanceAscending = new DistanceAscending();
+                Collections.sort(activityList, distanceAscending);
+
+                System.out.println("Distance Ascending:");
+                display(activityList);
+
+//                Display activities sorted as distance descending
+
+                DistanceDescending distanceDescending = new DistanceDescending();
+                Collections.sort(activityList, distanceDescending);
+
+                System.out.println("Distance Descending:");
+                display(activityList);
+
             }
         } catch (FileNotFoundException exception)
         {
@@ -109,6 +139,8 @@ public class Main
 
     public static void display(List<Activity> activityList)
     {
+        System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned"); // temporary line location
+        System.out.println("------------------------------------------------------------------------------------------------------");
         for (Activity activity : activityList)
         {
             activity.calculateIntensity();
