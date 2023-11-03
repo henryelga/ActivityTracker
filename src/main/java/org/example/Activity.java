@@ -8,6 +8,10 @@ public class Activity
     private double distance; // in kilometers
     private int heart_rate; // in beats per minute
 
+    private String intensity;
+
+    private double calories_burned;
+
     public Activity(String activity_type, double duration, String date, double distance, int heart_rate)
     {
         this.activity_type = activity_type;
@@ -47,55 +51,173 @@ public class Activity
         this.date = date;
     }
 
-    public double getDistance() {
+    public double getDistance()
+    {
         return distance;
     }
 
-    public void setDistance(double distance) {
+    public void setDistance(double distance)
+    {
         this.distance = distance;
     }
 
-    public int getHeart_rate() {
+    public int getHeart_rate()
+    {
         return heart_rate;
     }
 
-    public void setHeart_rate(int heart_rate) {
+    public void setHeart_rate(int heart_rate)
+    {
         this.heart_rate = heart_rate;
     }
 
+    public void calculateIntensity()
+    {
+        double kilometer_per_hour = distance / (duration / 60);
+
+        if (activity_type.equals("Swimming"))
+        {
+            if (kilometer_per_hour <= 0.5)
+            {
+                intensity = "Very Light";
+            } else if (kilometer_per_hour <= 1.25)
+            {
+                intensity = "Light";
+            } else if (kilometer_per_hour <= 2)
+            {
+                intensity = "Moderate";
+            } else if (kilometer_per_hour <= 2.75)
+            {
+                intensity = "Vigorous";
+            } else if (kilometer_per_hour <= 3.5)
+            {
+                intensity = "Very Vigorous";
+            }
+        } else if (activity_type.equals("Running"))
+        {
+            if (kilometer_per_hour <= 4)
+            {
+                intensity = "Very Light";
+            } else if (kilometer_per_hour > 4 && kilometer_per_hour <= 8)
+            {
+                intensity = "Light";
+            } else if (kilometer_per_hour > 8 && kilometer_per_hour <= 12)
+            {
+                intensity = "Moderate";
+            } else if (kilometer_per_hour > 12 && kilometer_per_hour <= 16)
+            {
+                intensity = "Vigorous";
+            } else if (kilometer_per_hour > 16 && kilometer_per_hour <= 24)
+            {
+                intensity = "Very Vigorous";
+            }
+        } else if (activity_type.equals("Cycling"))
+        {
+            if (kilometer_per_hour <= 8)
+            {
+                intensity = "Very Light";
+            } else if (kilometer_per_hour > 8 && kilometer_per_hour <= 16)
+            {
+                intensity = "Light";
+            } else if (kilometer_per_hour >= 17 && kilometer_per_hour <= 25)
+            {
+                intensity = "Moderate";
+            } else if (kilometer_per_hour >= 25 && kilometer_per_hour <= 33)
+            {
+                intensity = "Vigorous";
+            } else if (kilometer_per_hour > 33 && kilometer_per_hour <= 40)
+            {
+                intensity = "Very Vigorous";
+            }
+        }
+    }
+
+    public void caloriesBurned()
+    {
+        if (activity_type.equals("Swimming"))
+        {
+            if (intensity.equals("Very Light"))
+            {
+                calories_burned = 5 * duration;
+            } else if (intensity.equals("Light"))
+            {
+                calories_burned = 6.3 * duration;
+            } else if (intensity.equals("Moderate"))
+            {
+                calories_burned = 7.6 * duration;
+            } else if (intensity.equals("Vigorous"))
+            {
+                calories_burned = 8.9 * duration;
+            } else if (intensity.equals("Very Vigorous"))
+            {
+                calories_burned = 10.2 * duration;
+            }
+        } else if (activity_type.equals("Running"))
+        {
+            if (intensity.equals("Very Light"))
+            {
+                calories_burned = 4.1 * duration;
+            } else if (intensity.equals("Light"))
+            {
+                calories_burned = 7.2 * duration;
+            } else if (intensity.equals("Moderate"))
+            {
+                calories_burned = 10 * duration;
+            } else if (intensity.equals("Vigorous"))
+            {
+                calories_burned = 15.4 * duration;
+            } else if (intensity.equals("Very Vigorous"))
+            {
+                calories_burned = 20.8 * duration;
+            }
+        } else if (activity_type.equals("Cycling"))
+        {
+            if (intensity.equals("Very Light"))
+            {
+                calories_burned = 2 * duration;
+            } else if (intensity.equals("Light"))
+            {
+                calories_burned = 5 * duration;
+            } else if (intensity.equals("Moderate"))
+            {
+                calories_burned = 7 * duration;
+            } else if (intensity.equals("Vigorous"))
+            {
+                calories_burned = 13 * duration;
+            } else if (intensity.equals("Very Vigorous"))
+            {
+                calories_burned = 15 * duration;
+            }
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+//        return("Activity Type   Date    Duration    Distance    Heart Rate \n" +
+        return (
+                activity_type + "   " + date + "    " + duration +
+                        "    " + distance + "    " + heart_rate + "  " +
+                        intensity + "   " + calories_burned);
+    }
+
+    //    no change blah blah
+
     /*
-    TODO
-     - energy expended based on the average kilometres per hour
-     - calories burned based on energy expended, type of activity and duration
-     -
-     - create class to make arrayList of activities
-     - view subset of activities  based on:
-        - activity type
-        - above minimum distance
-        - type of energy exceeded
-        - above minimum duration
-     -
-     - make separate comparator classes:
-        - Calories burned (Descending)
-        - Date (Ascending/Descending)
-        - Activity Duration (Ascending/Descending)
-        - Type of Activity
-        - Distance (Ascending/Descending
-      -
-      - Make enum class for activities
-        - running, swimming, cycling
-      - Find specific activity based on their Natural ordering
-        using the binary search function of the Collections class
-      -
-      - View statistics on their overall performance
-            - Average distance per activity
-            - Average calories burned
-      -
-      - Additional Fields to calculate:
-        - Intensity
-        - Calories Burned
-      -
-      - You are required to use a combination of natural ordering
-      - separate Comparator class(es), an anonymous inner class, and a number of lambdas
+    TO DO:
+STEP 1
+Allow the user to upload a csv file
+Read in the data from a csv file
+Write menu to allow user to view:
+- calories burned
+- date
+- activity duration
+- type of activity
+- distance
+
+STEP 2
+Allow user to view subset of their data (?)
+Find specific activity using binary search
+View statistics of overall performance
     */
 }
