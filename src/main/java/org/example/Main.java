@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.io.*;
@@ -28,7 +29,7 @@ public class Main
         System.out.println("2. activity_data_50.csv");
         System.out.println("3. activity_data_100.csv");
         System.out.println("4. activity_data_1000.csv");
-        System.out.print("Enter option: ");
+        System.out.print("\nEnter option: ");
 
         String fileName;
         int selectFile = kb.nextInt();
@@ -43,7 +44,8 @@ public class Main
 
         List<Activity> activityList = new ArrayList<>();
 
-        System.out.printf("%-16s %-12s %-10s %-10s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM"); // temporary line location
+        System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned"); // temporary line location
+        System.out.println("------------------------------------------------------------------------------------------------------");
         File f = new File(fileName);
         try (Scanner sc = new Scanner(f))
         {
@@ -69,17 +71,49 @@ public class Main
                     activityList.add(activity);
 
                 }
-                for (Activity activity : activityList)
-                {
-                    activity.calculateIntensity();
-                    activity.caloriesBurned();
-                    System.out.println(activity);
-                }
+
+                display(activityList);
+
+//                Display activities sorted as calories descending
+
+                CaloriesBurnedDescending caloriesBurnedDescending = new CaloriesBurnedDescending();
+                Collections.sort(activityList, caloriesBurnedDescending);
+
+                System.out.println("Calories Descending:");
+                display(activityList);
+
+//                Display activities sorted as dates ascending
+
+                DatesAscending datesAscending = new DatesAscending();
+                Collections.sort(activityList, datesAscending);
+
+                System.out.println("Dates Ascending:");
+                display(activityList);
+
+//                Display activities sorted as dates descending
+
+                DatesDescending datesDescending = new DatesDescending();
+                Collections.sort(activityList, datesDescending);
+
+                System.out.println("Dates Descending:");
+                display(activityList);
 
             }
         } catch (FileNotFoundException exception)
         {
             System.out.println("FileNotFoundException caught. The file " + fileName + "may not exist." + exception);
+        }
+
+
+    }
+
+    public static void display(List<Activity> activityList)
+    {
+        for (Activity activity : activityList)
+        {
+            activity.calculateIntensity();
+            activity.caloriesBurned();
+            System.out.println(activity);
         }
     }
 }

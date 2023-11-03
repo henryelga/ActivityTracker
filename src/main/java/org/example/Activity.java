@@ -191,15 +191,23 @@ public class Activity
         }
     }
 
+    public String getIntensity()
+    {
+        return intensity;
+    }
+
+    public double getCalories_burned()
+    {
+        return calories_burned;
+    }
+
     @Override
     public String toString()
     {
-//        return("Activity Type   Date    Duration    Distance    Heart Rate \n" +
-        return (
-                activity_type + "   " + date + "    " + duration +
-                        "    " + distance + "    " + heart_rate + "  " +
-                        intensity + "   " + calories_burned);
+        return String.format("%-16s %-12s %-10.1f %-10.1f %-10d %-16s %-10.1f",
+                activity_type, date, duration, distance, heart_rate, intensity, calories_burned);
     }
+
 
     //    no change blah blah
 
