@@ -109,6 +109,7 @@ public class Main
                             break;
                         case 8:
                             displaySubset(activityList);
+                            break;
                         case 9:
                             continueSorting = false;
                             break;
@@ -141,8 +142,8 @@ public class Main
 
     public static void displaySubset(List<Activity> activityList)
     {
-        boolean continueSorting = true;
-        while (continueSorting)
+        boolean viewSubset = true;
+        while (viewSubset)
         {
             Scanner kb = new Scanner(System.in);
             System.out.println();
@@ -212,7 +213,7 @@ public class Main
                     }
                     break;
                 case 5:
-                    continueSorting = false;
+                    viewSubset = false;
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
