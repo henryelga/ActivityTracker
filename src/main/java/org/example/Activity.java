@@ -211,10 +211,12 @@ public class Activity implements Comparable<Activity>
     }
 
     @Override
-    public int compareTo(Activity o)
+    public int compareTo(Activity a)
     {
-        return 0;
+        return this.activity_type.compareTo(a.activity_type);
+//        return 0;
     }
+
 
 //    need to implement enum
 

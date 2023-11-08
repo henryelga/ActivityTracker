@@ -65,6 +65,7 @@ public class Main
 
                 }
 
+                Collections.sort(activityList);
                 display(activityList);
 
                 boolean displayMenu = true;
