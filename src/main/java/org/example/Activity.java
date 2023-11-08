@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Collections;
+import java.util.Objects;
 
 public class Activity implements Comparable<Activity>
 {
@@ -211,28 +212,9 @@ public class Activity implements Comparable<Activity>
     }
 
     @Override
-    public int compareTo(Activity o)
+    public int compareTo(Activity a)
     {
-        return 0;
+        return this.activity_type.compareTo(a.activity_type);
     }
 
-//    need to implement enum
-
-    /*
-    TO DO:
-STEP 1
-Allow the user to upload a csv file
-Read in the data from a csv file
-Write menu to allow user to view:
-- calories burned
-- date
-- activity duration
-- type of activity
-- distance
-
-STEP 2
-Allow user to view subset of their data
-Find specific activity using binary search
-View statistics of overall performance
-    */
 }
