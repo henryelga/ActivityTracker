@@ -124,8 +124,6 @@ public class Main
             System.out.println("FileNotFoundException caught. The file " + fileName + "may not exist." + exception);
         }
 
-        displaySubset(activityList);
-
     }
 
     public static void display(List<Activity> activityList)
