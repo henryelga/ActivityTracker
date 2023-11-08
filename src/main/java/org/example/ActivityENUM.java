@@ -1,6 +1,7 @@
 package org.example;
 
-public enum AcitvityENUM {
+public enum ActivityENUM
+{
     Running,
     Swimming,
     Cycling
