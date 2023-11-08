@@ -51,7 +51,7 @@ public class Main
                     String[] tokens = line.split(",");
 
                     String activity_type = tokens[0];
-                    String date = tokens[1];
+                    String date = tokens[1].trim();
                     double duration = Double.parseDouble(tokens[2]);
                     double distance = Double.parseDouble(tokens[3]);
                     int heart_rate = (int) Double.parseDouble(tokens[4]);
@@ -246,34 +246,37 @@ public class Main
             switch (overallChoice)
             {
                 case 1:
-                    double swimAvg=0, runAvg=0, cycAvg=0;
-                    int swimCount=0, runCount=0, cycCount=0;
+                    double swimAvg = 0, runAvg = 0, cycAvg = 0;
+                    int swimCount = 0, runCount = 0, cycCount = 0;
 
                     for (Activity activity : activityList)
                     {
                         boolean swimming = activity.getActivity_type().equals("Swimming");
                         boolean running = activity.getActivity_type().equals("Running");
                         boolean cycling = activity.getActivity_type().equals("Cycling");
-                        if (swimming) {
+                        if (swimming)
+                        {
                             swimCount++;
                             swimAvg += activity.getDistance();
                         }
-                        if (running) {
+                        if (running)
+                        {
                             runCount++;
                             runAvg += activity.getDistance();
                         }
-                        if (cycling) {
+                        if (cycling)
+                        {
                             cycCount++;
                             cycAvg += activity.getDistance();
                         }
                     }
-                    swimAvg = swimAvg/swimCount;
-                    runAvg = runAvg/runCount;
-                    cycAvg = cycAvg/cycCount;
+                    swimAvg = swimAvg / swimCount;
+                    runAvg = runAvg / runCount;
+                    cycAvg = cycAvg / cycCount;
                     System.out.println();
-                    System.out.println("Swimming average: "+swimAvg+"km");
-                    System.out.println("Running average: "+runAvg+"km");
-                    System.out.println("Cycling average: "+cycAvg+"km");
+                    System.out.println("Swimming average: " + swimAvg + "km");
+                    System.out.println("Running average: " + runAvg + "km");
+                    System.out.println("Cycling average: " + cycAvg + "km");
                     break;
 
                 case 2:
@@ -284,9 +287,9 @@ public class Main
                         avgCalories += activity.getCalories_burned();
                         calCount++;
                     }
-                    avgCalories = avgCalories/calCount;
+                    avgCalories = avgCalories / calCount;
                     System.out.println();
-                    System.out.println("Average calories burned: "+avgCalories);
+                    System.out.println("Average calories burned: " + avgCalories);
                     break;
 
                 case 0:
@@ -314,18 +317,60 @@ public class Main
         @Override
         public int compare(Activity a1, Activity a2)
         {
-            return a1.getDate().compareTo(a2.getDate());
+//            splitting the date into three parts (dd, mm, yyyy)
+            String[] date1Parts = a1.getDate().split("/");
+            String[] date2Parts = a2.getDate().split("/");
+
+            // comparing year
+            int year1 = Integer.parseInt(date1Parts[2]);
+            int year2 = Integer.parseInt(date2Parts[2]);
+            if (year1 != year2)
+            {
+                return Integer.compare(year1, year2);
+            }
+
+            // comparing month
+            int month1 = Integer.parseInt(date1Parts[1]);
+            int month2 = Integer.parseInt(date2Parts[1]);
+            if (month1 != month2)
+            {
+                return Integer.compare(month1, month2);
+            }
+
+            // comparing day
+            int day1 = Integer.parseInt(date1Parts[0]);
+            int day2 = Integer.parseInt(date2Parts[0]);
+            return Integer.compare(day1, day2);
         }
     }
 
-    private static class DatesDescending implements Comparator<Activity>
-    {
+    private static class DatesDescending implements Comparator<Activity> {
         @Override
-        public int compare(Activity a1, Activity a2)
-        {
-            return a2.getDate().compareTo(a1.getDate());
+        public int compare(Activity a1, Activity a2) {
+            String[] date1Parts = a1.getDate().split("/");
+            String[] date2Parts = a2.getDate().split("/");
+
+            // comparing year
+            int year1 = Integer.parseInt(date1Parts[2]);
+            int year2 = Integer.parseInt(date2Parts[2]);
+            if (year1 != year2) {
+                return Integer.compare(year2, year1);
+            }
+
+            // comparing month
+            int month1 = Integer.parseInt(date1Parts[1]);
+            int month2 = Integer.parseInt(date2Parts[1]);
+            if (month1 != month2) {
+                return Integer.compare(month2, month1);
+            }
+
+            // comparing date
+            int day1 = Integer.parseInt(date1Parts[0]);
+            int day2 = Integer.parseInt(date2Parts[0]);
+            return Integer.compare(day2, day1);
         }
     }
+
 
     public static void displayDistanceAscending(List<Activity> activityList)
     {
