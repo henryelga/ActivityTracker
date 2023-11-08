@@ -217,4 +217,13 @@ public class Activity implements Comparable<Activity>
         return this.activity_type.compareTo(a.activity_type);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Activity other = (Activity) obj;
+        return Double.compare(other.duration, duration) == 0 &&
+                Double.compare(other.distance, distance) == 0 &&
+                heart_rate == other.heart_rate &&
+                Objects.equals(activity_type, other.activity_type) &&
+                Objects.equals(date, other.date);
+    }
 }
