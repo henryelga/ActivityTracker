@@ -100,6 +100,7 @@ public class Main
                             break;
                         case 3:
                             displayOverall(activityList);
+                            break;
                         case 0:
                             displayMenu = false;
                             System.out.println("Exiting...");
@@ -245,7 +246,58 @@ public class Main
             switch (overallChoice)
             {
                 case 1:
+                    double swimAvg=0, runAvg=0, cycAvg=0;
+                    int swimCount=0, runCount=0, cycCount=0;
+
+                    for (Activity activity : activityList)
+                    {
+                        boolean swimming = activity.getActivity_type().equals("Swimming");
+                        boolean running = activity.getActivity_type().equals("Running");
+                        boolean cycling = activity.getActivity_type().equals("Cycling");
+                        if (swimming) {
+                            swimCount++;
+                            swimAvg += activity.getDistance();
+                        }
+                        if (running) {
+                            runCount++;
+                            runAvg += activity.getDistance();
+                        }
+                        if (cycling) {
+                            cycCount++;
+                            cycAvg += activity.getDistance();
+                        }
+                    }
+                    swimAvg = swimAvg/swimCount;
+                    runAvg = runAvg/runCount;
+                    cycAvg = cycAvg/cycCount;
+                    System.out.println();
+                    System.out.println("Swimming average: "+swimAvg+"km");
+                    System.out.println("Running average: "+runAvg+"km");
+                    System.out.println("Cycling average: "+cycAvg+"km");
+                    break;
+
+                case 2:
+                    double avgCalories = 0;
+                    int calCount = 0;
+                    for (Activity activity : activityList)
+                    {
+                        avgCalories += activity.getCalories_burned();
+                        calCount++;
+                    }
+                    avgCalories = avgCalories/calCount;
+                    System.out.println();
+                    System.out.println("Average calories burned: "+avgCalories);
+                    break;
+
+                case 0:
+                    viewOverall = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
             }
+
         }
     }
 
