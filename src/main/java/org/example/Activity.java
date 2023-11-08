@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Collections;
 
-public class Activity
+public class Activity implements Comparable<Activity>
 {
     private String activity_type;
     private double duration; // in minutes
@@ -208,6 +208,12 @@ public class Activity
     {
         return String.format("%-16s %-12s %-10.1f %-10.1f %-10d %-16s %-10.1f",
                 activity_type, date, duration, distance, heart_rate, intensity, calories_burned);
+    }
+
+    @Override
+    public int compareTo(Activity o)
+    {
+        return 0;
     }
 
 //    need to implement enum
