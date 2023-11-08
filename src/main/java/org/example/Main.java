@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.io.*;
 
 import java.io.FileNotFoundException;
@@ -61,7 +58,20 @@ public class Main
 
                     Activity activity = new Activity(activity_type, duration, date, distance, heart_rate);
 
-                    activityList.add(activity);
+                    boolean isDuplicate = false;
+                    for (Activity existingActivity : activityList)
+                    {
+                        if (existingActivity.equals(activity))
+                        {
+                            isDuplicate = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDuplicate)
+                    {
+                        activityList.add(activity);
+                    }
 
                 }
 
@@ -80,7 +90,8 @@ public class Main
                     System.out.print("Enter option: ");
                     int menuSelect = kb.nextInt();
                     kb.nextLine();
-                    switch (menuSelect) {
+                    switch (menuSelect)
+                    {
                         case 1:
                             displaySort(activityList);
                             break;
@@ -146,10 +157,12 @@ public class Main
                     displayCaloriesBurnedDescending(activityList);
                     break;
                 case 2:
-                    displayDatesAscending(activityList);
+                    Collections.sort(activityList, new DatesAscending());
+                    display(activityList);
                     break;
                 case 3:
-                    displayDatesDescending(activityList);
+                    Collections.sort(activityList, new DatesDescending());
+                    display(activityList);
                     break;
                 case 4:
                     displayDistanceAscending(activityList);
@@ -217,7 +230,8 @@ public class Main
     public static void displayOverall(List<Activity> activityList)
     {
         boolean viewOverall = true;
-        while (viewOverall) {
+        while (viewOverall)
+        {
             Scanner kb = new Scanner(System.in);
             System.out.println();
             System.out.println("View overall activity:");
@@ -228,7 +242,8 @@ public class Main
 
             int overallChoice = kb.nextInt();
             kb.nextLine();
-            switch (overallChoice) {
+            switch (overallChoice)
+            {
                 case 1:
             }
         }
@@ -242,51 +257,45 @@ public class Main
         display(activityList);
     }
 
-    public static void displayDatesAscending(List<Activity> activityList)
+    private static class DatesAscending implements Comparator<Activity>
     {
-        DatesAscending datesAscending = new DatesAscending();
-        Collections.sort(activityList, datesAscending);
-
-        display(activityList);
+        @Override
+        public int compare(Activity a1, Activity a2)
+        {
+            return a1.getDate().compareTo(a2.getDate());
+        }
     }
 
-    public static void displayDatesDescending(List<Activity> activityList)
+    private static class DatesDescending implements Comparator<Activity>
     {
-        DatesDescending datesDescending = new DatesDescending();
-        Collections.sort(activityList, datesDescending);
-
-        display(activityList);
+        @Override
+        public int compare(Activity a1, Activity a2)
+        {
+            return a2.getDate().compareTo(a1.getDate());
+        }
     }
 
     public static void displayDistanceAscending(List<Activity> activityList)
     {
-        DistanceAscending distanceAscending = new DistanceAscending();
-        Collections.sort(activityList, distanceAscending);
-
+        Collections.sort(activityList, (a1, a2) -> Double.compare(a1.getDistance(), a2.getDistance()));
         display(activityList);
     }
 
     public static void displayDistanceDescending(List<Activity> activityList)
     {
-        DistanceDescending distanceDescending = new DistanceDescending();
-        Collections.sort(activityList, distanceDescending);
-
+        Collections.sort(activityList, (a1, a2) -> Double.compare(a2.getDistance(), a1.getDistance()));
         display(activityList);
     }
 
     public static void displayDurationAscending(List<Activity> activityList)
     {
-        DurationAscending durationAscending = new DurationAscending();
-        Collections.sort(activityList, durationAscending);
-
+        Collections.sort(activityList, (a1, a2) -> Double.compare(a1.getDuration(), a2.getDuration()));
         display(activityList);
     }
 
     public static void displayDurationDescending(List<Activity> activityList)
     {
-        DurationDescending durationDescending = new DurationDescending();
-        Collections.sort(activityList, durationDescending);
-
+        Collections.sort(activityList, (a1, a2) -> Double.compare(a2.getDuration(), a1.getDuration()));
         display(activityList);
     }
 
