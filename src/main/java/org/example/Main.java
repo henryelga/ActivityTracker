@@ -74,6 +74,7 @@ public class Main
                     System.out.println("1. Sort activity");
                     System.out.println("2. View subsets of activity");
                     System.out.println("3. View statistics of overall performance");
+                    System.out.println("0. Exit");
 
                     System.out.print("Enter option: ");
                     int menuSelect = kb.nextInt();
@@ -89,6 +90,7 @@ public class Main
                             displayOverall(activityList);
                         case 0:
                             displayMenu = false;
+                            System.out.println("Exiting...");
                             break;
                         default:
                             System.out.println("Invalid option. Please try again.");
@@ -201,7 +203,7 @@ public class Main
                 case 4:
                     subsetDuration(activityList);
                     break;
-                case 5:
+                case 0:
                     viewSubset = false;
                     break;
                 default:
