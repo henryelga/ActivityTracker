@@ -67,56 +67,34 @@ public class Main
 
                 display(activityList);
 
-                boolean continueSorting = true;
-                while (continueSorting)
+                boolean displayMenu = true;
+                while (displayMenu)
                 {
-                    System.out.println("\nSelect sorting option: \n");
-                    System.out.println("1. Calories Descending");
-                    System.out.println("2. Dates Ascending");
-                    System.out.println("3. Dates Descending");
-                    System.out.println("4. Distance Ascending");
-                    System.out.println("5. Distance Descending");
-                    System.out.println("6. Duration Ascending");
-                    System.out.println("7. Duration Descending");
-                    System.out.println("8. View Subsets");
-                    System.out.println("9. Exit");
+                    System.out.println("\nSelect viewing option: \n");
+                    System.out.println("1. Sort activity");
+                    System.out.println("2. View subsets of activity");
+                    System.out.println("3. View statistics of overall performance");
 
                     System.out.print("Enter option: ");
-                    int option = kb.nextInt();
+                    int menuSelect = kb.nextInt();
                     kb.nextLine();
-                    switch (option)
-                    {
+                    switch (menuSelect) {
                         case 1:
-                            displayCaloriesBurnedDescending(activityList);
+                            displaySort(activityList);
                             break;
                         case 2:
-                            displayDatesAscending(activityList);
-                            break;
-                        case 3:
-                            displayDatesDescending(activityList);
-                            break;
-                        case 4:
-                            displayDistanceAscending(activityList);
-                            break;
-                        case 5:
-                            displayDistanceDescending(activityList);
-                            break;
-                        case 6:
-                            displayDurationAscending(activityList);
-                            break;
-                        case 7:
-                            displayDurationDescending(activityList);
-                            break;
-                        case 8:
                             displaySubset(activityList);
                             break;
-                        case 9:
-                            continueSorting = false;
+                        case 3:
+                            displayOverall(activityList);
+                        case 0:
+                            displayMenu = false;
                             break;
                         default:
                             System.out.println("Invalid option. Please try again.");
                             break;
                     }
+
                 }
             }
         } catch (FileNotFoundException exception)
@@ -138,6 +116,60 @@ public class Main
         }
     }
 
+    public static void displaySort(List<Activity> activityList)
+    {
+        boolean viewSort = true;
+        while (viewSort)
+        {
+            Scanner kb = new Scanner(System.in);
+            System.out.println();
+            System.out.println("Sort activity by:");
+            System.out.println("----------------------");
+            System.out.println("1. Calories Descending");
+            System.out.println("2. Dates Ascending");
+            System.out.println("3. Dates Descending");
+            System.out.println("4. Distance Ascending");
+            System.out.println("5. Distance Descending");
+            System.out.println("6. Duration Ascending");
+            System.out.println("7. Duration Descending");
+            System.out.println("0. Exit");
+            System.out.println();
+            System.out.print("Enter option: ");
+            int option = kb.nextInt();
+            kb.nextLine();
+            switch (option)
+            {
+                case 1:
+                    displayCaloriesBurnedDescending(activityList);
+                    break;
+                case 2:
+                    displayDatesAscending(activityList);
+                    break;
+                case 3:
+                    displayDatesDescending(activityList);
+                    break;
+                case 4:
+                    displayDistanceAscending(activityList);
+                    break;
+                case 5:
+                    displayDistanceDescending(activityList);
+                    break;
+                case 6:
+                    displayDurationAscending(activityList);
+                    break;
+                case 7:
+                    displayDurationDescending(activityList);
+                    break;
+                case 0:
+                    viewSort = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        }
+    }
+
     public static void displaySubset(List<Activity> activityList)
     {
         boolean viewSubset = true;
@@ -145,13 +177,13 @@ public class Main
         {
             Scanner kb = new Scanner(System.in);
             System.out.println();
-            System.out.println("View subset of activity by: ");
-            System.out.println();
+            System.out.println("View subset of activity by:");
+            System.out.println("-------------------------------------");
             System.out.println("1. Activity Type");
-            System.out.println("2. Above a minimum distance");
+            System.out.println("2. Above a minimum distance (km)");
             System.out.println("3. Type of energy expended");
-            System.out.println("4. Above a minimum duration");
-            System.out.println("5. Exit Sorting");
+            System.out.println("4. Above a minimum duration (minutes)");
+            System.out.println("0. Exit");
 
             int subsetChoice = kb.nextInt();
             kb.nextLine();
@@ -184,16 +216,16 @@ public class Main
                     }
                     break;
                 case 3:
-                    System.out.println("Enter type of energy: ");
+                    System.out.println("Enter intensity: ");
                     String energyType = kb.nextLine();
-                    energyType.toLowerCase();
+
                     System.out.printf("%-16s %-12s %-10s %-10s %-10s %-16s %-10s %n", "Activity Type", "Date", "Duration", "Distance", "BPM", "Intensity", "Calories Burned");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                     for (Activity activity : activityList)
                     {
                         activity.calculateIntensity();
                         activity.caloriesBurned();
-                        if (activity.getActivity_type().toLowerCase().equals(energyType))
+                        if (activity.getIntensity().equals(energyType))
                             System.out.println(activity);
                     }
                     break;
@@ -210,12 +242,32 @@ public class Main
                             System.out.println(activity);
                     }
                     break;
-                case 5:
+                case 0:
                     viewSubset = false;
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
                     break;
+            }
+        }
+    }
+
+    public static void displayOverall(List<Activity> activityList)
+    {
+        boolean viewOverall = true;
+        while (viewOverall) {
+            Scanner kb = new Scanner(System.in);
+            System.out.println();
+            System.out.println("View overall activity:");
+            System.out.println("--------------------------------");
+            System.out.println("1. Average distance per activity");
+            System.out.println("2. Average calories burned");
+            System.out.println("0. Exit");
+
+            int overallChoice = kb.nextInt();
+            kb.nextLine();
+            switch (overallChoice) {
+                case 1:
             }
         }
     }

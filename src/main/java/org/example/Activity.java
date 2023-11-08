@@ -231,7 +231,7 @@ Write menu to allow user to view:
 - distance
 
 STEP 2
-Allow user to view subset of their data (?)
+Allow user to view subset of their data
 Find specific activity using binary search
 View statistics of overall performance
     */
