@@ -201,7 +201,7 @@ public class Main
                 case 4:
                     subsetDuration(activityList);
                     break;
-                case 0:
+                case 5:
                     viewSubset = false;
                     break;
                 default:
